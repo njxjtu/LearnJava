@@ -1,3 +1,5 @@
+package LearnJava;
+
 class BNode{
 	int t;
 	int count;
@@ -42,6 +44,71 @@ public class BTree {
 		return match;
 	}
 	
+	public void BTreeInsert(BNode root, int key){
+		//root is null
+		if (root == null || root.count == 0){
+			System.out.println("root is null");
+			root.key[0] = key;
+			root.count = 1;
+		}
+		//root is not null and is not full and it is leaf
+		if (root != null && root.count != 0 && root.count != (root.t*2-1) && root.leaf){
+			System.out.println("root is leaf");
+			for (int i=0; i<root.count; i++){
+				if (key < root.key[i]){
+					int[] temp = new int[root.t*2-1];
+					temp[i] = key;
+					root.count++;
+					for (int j=0; j<i; j++){
+						temp[j] = root.key[j];
+					}
+					for (int j=i+1; j<root.count; j++){
+						temp[j] = root.key[j-1];
+					}
+					root.key = temp;
+					return;
+				}
+			}
+			root.key[root.count-1] = key;
+			root.count++;
+			return;
+		}
+		//root is not leaf
+		if(!root.leaf){
+			System.out.println("root is not leaf");
+			for (int i=0; i<root.count; i++){
+				if(key < root.key[i]){
+					BTreeInsert(root.child[i], key);
+				}
+			}
+			if(key>root.key[root.count-1]){
+				BTreeInsert(root.child[root.count], key);
+			}
+		}
+	}
+	
+	public void BTreePrintInorder(BNode root){
+		//root is null
+		if (root == null || root.count == 0){
+			return;
+		}
+		//root is leaf
+		if (root != null && root.count != 0 && root.leaf){
+			for (int i=0; i<root.count; i++){
+				System.out.println(root.key[i]);
+			}
+		}
+		//root is not leaf
+		if(!root.leaf){
+			for (int i=0; i < root.t*2; i++){
+				BTreePrintInorder(root.child[i]);
+				if(i<root.count){
+				     System.out.println(root.key[i]);
+				}
+			}
+		}
+	}
+	
 	public static void main(String[] args){
 /*	
  *  	Construct a BTree
@@ -72,14 +139,18 @@ public class BTree {
 		BTree testT = new BTree(3, input_root);
 		
 		//Search for 8
-		BNode result;
+/*		BNode result;
 		result = testT.BTreeSearch(input_root,8);
 		if (result != null){
 		   for (int j : result.key){
 		      System.out.println(j);
 		   }
 		}
-		else System.out.println("result is null");
+		else System.out.println("result is null");*/
 		
+		//Insert 17
+		testT.BTreeInsert(input_root, 17);
+		
+		testT.BTreePrintInorder(input_root);
 	}
 }
