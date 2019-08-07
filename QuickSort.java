@@ -1,3 +1,4 @@
+//Use higher index end as the pivot
 public class QuickSort {
 
 	int partition(int[] arr, int low, int high){
