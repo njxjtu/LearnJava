@@ -25,12 +25,12 @@ public class RegExpMatching {
     	int i=0, j=0;
     	
         while(i<s.length() && j<p.length()){
+        	System.out.println("s.charAt(i): "+s.charAt(i));
+        	System.out.println("p.charAt(j): "+p.charAt(j));
         	if(p.charAt(j)>='a' && p.charAt(j)<='z' && (j+1)<p.length() && p.charAt(j+1)=='*'){
-        		if(p.charAt(j)==s.charAt(i)) {
-        			i++;
+        		System.out.println("In 1 ");
         			while(i<s.length() && s.charAt(i)==p.charAt(j)) i++; 
-        			j++; continue;}
-        		else return false;
+        			j=j+2; 
         	}
         	else if (p.charAt(j)>='a' && p.charAt(j)<='z' && (j+1)>=p.length() ){
         		if(p.charAt(j)==s.charAt(i) && i+1 >= s.length()){
@@ -53,19 +53,51 @@ public class RegExpMatching {
         			continue;
         		}
         	}
-        	else if (p.charAt(j)=='.' ){
-        			i++; j++;
-        			continue;
+        	else if (p.charAt(j)=='.' && (j+1)>=p.length() ){
+        		System.out.println("In . 1");
+        		if((i+1)==s.length()) return true;
+        		else return false;
+        	}
+        	else if (p.charAt(j)=='.' && (j+1)<p.length() && p.charAt(j+1)>='a' && p.charAt(j+1)<='z' ){
+        		System.out.println("In . 2");
+        		if((i+1)==s.length()) return false;
+        		else if((i+1)<s.length()){
+        			i++; j++; continue;
+        		};
+        	}
+        	else if (p.charAt(j)=='.' && (j+1)<p.length() && p.charAt(j+1)=='*'){
+        		System.out.println("In . 3");
+        		while(i+1<s.length()){
+        			if(s.charAt(i)==s.charAt(i+1)){i++;}
+        			else break;
+        		}
+        		i++; j++; continue;
         	}
         	else if (p.charAt(j)=='*' ){
-        		if(p.charAt(j)==s.charAt(i)){
-        			i++; j++;
-        			continue;
-        		}
+        		System.out.println("In * ");
+
+        			while(i+1<s.length()){
+        				if(s.charAt(i)==s.charAt(i+1)){
+        					i++;
+        				}
+        				else break;
+        			}
+        			i++;j++; continue;
+
     	    }
+        	System.out.println("Outside ");
+        	i++;
+        	j++;
         }
         
+        System.out.println("i: "+i+" j: "+j);
+        if(i<s.length() || j<p.length()){return false;}
         
         return true;
+    }
+    
+    public static void main(String[] args){
+    	RegExpMatching obj = new RegExpMatching();
+    	System.out.println(obj.isMatch("miss","mis*"));
     }
 }
