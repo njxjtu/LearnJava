@@ -65,7 +65,6 @@ public class LetterCombPhoneNum {
 
     int posttime(String digits, int i){
     	int posttimes=1;
-    	if(i+1<digits.length()){
 	    	for(int k=i+1; k<digits.length();k++){
 	    		if(digits.charAt(k)>='2' && digits.charAt(k)<='6' || digits.charAt(k)=='8'){
 	    			posttimes = posttimes*3;
@@ -74,7 +73,6 @@ public class LetterCombPhoneNum {
 	    			posttimes = posttimes*4;
 	    		}
 	    	}
-    	}
     	return posttimes;
     }
 
