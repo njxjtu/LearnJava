@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,10 @@ Note:
 Although the above answer is in lexicographical order, your answer could be in any order you want.
  */
 public class LetterCombPhoneNum {
+   
     public List<String> letterCombinations(String digits) {
     	int lstrlen = 1;
+    	List<String> lstr_ini = new ArrayList<String>();
     	List<String> lstr = new ArrayList<String>();
     	for(int i=0; i<digits.length(); i++){
             if((digits.charAt(i)>='2' && digits.charAt(i)<='6') || digits.charAt(i)=='8'){
@@ -36,37 +39,52 @@ public class LetterCombPhoneNum {
             	lstrlen = lstrlen*4;
             }
         }
+    	        lstr_ini.add("");
+    	        lstr_ini.add("");
+    	    	lstr_ini.add("abc");
+    	    	lstr_ini.add("def");
+    	    	lstr_ini.add("ghi");
+    	    	lstr_ini.add("jkl");
+    	    	lstr_ini.add("mno");
+    	    	lstr_ini.add("pqrs");
+    	    	lstr_ini.add("tuv");
+    	    	lstr_ini.add("wxyz");
+
     	
     	for(int i=0; i<lstrlen; i++){
-    		lstr.add("");
+    		StringBuilder sb = new StringBuilder();
+    		for(int j=0; j<digits.length();j++){
+    			int cur_digit = i/posttime(digits,j);
+    			if(cur_digit>=lstr_ini.get(digits.charAt(j)-'0').length())cur_digit =cur_digit%lstr_ini.get(digits.charAt(j)-'0').length();
+    			sb.append(lstr_ini.get(digits.charAt(j)-'0').charAt(cur_digit));
+    		}
+    		lstr.add(sb.toString());
     	}
-    	System.out.println("lstrlen: "+lstrlen);
-    	
-	    for(int i=0; i<digits.length();i++){
-	    	   if(i==0){
-	    		   if(digits.charAt(i)=='2'){
-	    			   System.out.println("digits.charAt(i)=='2' ");
-	    			   for(int j=0; j<lstrlen; j++){
-	    				   System.out.println("j: "+j+" lstrlen/3: "+lstrlen/3);
-	    				   if(j<lstrlen/3){
-	    					   System.out.println("j: "+j+"lstr.get(j): "+lstr.get(j));
-	    					   lstr.set(j,lstr.get(j).concat("a"));
-	    					   System.out.println("j: "+j+"lstr.get(j): "+lstr.get(j));
-	    					   }
-	    				   else if(j>=lstrlen/3 && j<lstrlen*2/3){lstr.set(j,lstr.get(j).concat("b"));}
-	    				   else lstr.set(j,lstr.get(j).concat("c"));
-	    			   }
-	    		   }
-	    	   }
-	       }
-	    return lstr;
+    	return lstr;
+    }
+
+    int posttime(String digits, int i){
+    	int posttimes=1;
+    	if(i+1<digits.length()){
+	    	for(int k=i+1; k<digits.length();k++){
+	    		if(digits.charAt(k)>='2' && digits.charAt(k)<='6' || digits.charAt(k)=='8'){
+	    			posttimes = posttimes*3;
+	    		}
+	    		if(digits.charAt(k)=='7' || digits.charAt(k)=='9'){
+	    			posttimes = posttimes*4;
+	    		}
+	    	}
+    	}
+    	return posttimes;
     }
 
     public static void main(String[] args){
     	LetterCombPhoneNum obj = new LetterCombPhoneNum();
-    	List<String> lstr = obj.letterCombinations("2");
+    	List<String> lstr = obj.letterCombinations("273");
     	for(String str : lstr){
     		System.out.println(str+", ");
     	}
+
+
     }
 }
