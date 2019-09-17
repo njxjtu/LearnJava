@@ -54,8 +54,7 @@ public class LetterCombPhoneNum {
     	for(int i=0; i<lstrlen; i++){
     		StringBuilder sb = new StringBuilder();
     		for(int j=0; j<digits.length();j++){
-    			int cur_digit = i/posttime(digits,j);
-    			if(cur_digit>=lstr_ini.get(digits.charAt(j)-'0').length())cur_digit =cur_digit%lstr_ini.get(digits.charAt(j)-'0').length();
+    			int cur_digit = i/posttime(digits,j)%lstr_ini.get(digits.charAt(j)-'0').length();
     			sb.append(lstr_ini.get(digits.charAt(j)-'0').charAt(cur_digit));
     		}
     		lstr.add(sb.toString());
