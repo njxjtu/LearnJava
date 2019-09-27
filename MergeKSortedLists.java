@@ -12,6 +12,13 @@ Input:
   2->6
 ]
 Output: 1->1->2->3->4->4->5->6
+
+Input:
+[
+   ,
+  1
+]
+Output: 1
 */
 /**
  * Definition for singly-linked list.
@@ -33,45 +40,61 @@ public class MergeKSortedLists {
         else if(lists.length >= 2){
         	System.out.println("In  >= 2");
         	curr1 = lists[0];
+        	System.out.println("lists.length "+lists.length);
         	curr2 = mergeKLists(Arrays.copyOfRange(lists, 1, lists.length));
-        	System.out.println("In  >= 2  curr2: "+curr2.val);
+        	
+        	if(curr1==null && curr2 !=null){
+        		return curr2;
+        	}
+        	else if(curr1 != null && curr2 == null){
+        		return curr1;
+        	}
+        	else if(curr1==null && curr1 == null){
+        		return newHead;
+        	}
+        	//System.out.println("In  >= 2  curr2: "+curr2.val);
         	while(curr1!=null && curr2!=null){
-            	ListNode temp = null;
+
             	if(curr1.val<=curr2.val){
-            		temp = curr1;
+            		curr = curr1;
             		curr1 = curr1.next;
             	}
             	else{
-            		temp = curr2;
+            		curr = curr2;
             		curr2 = curr2.next;
-            	}
-            	System.out.println("temp: "+temp.val);
-            	if(curr == null){
-            		curr = temp;
-            	}
-            	else{
-            		curr.next = temp;
-            		curr = curr.next;
             	}
             	if(newHead == null){
             		newHead = curr;
             	}
+            	curr = curr.next;
             }
             
             while(curr1!=null){
             	ListNode temp = null;
             	System.out.println("curr1!=null");
             	temp = curr1;
-            	curr.next = temp;
+            	if(curr!=null){
+            		curr.next = temp;
+            	}
+            	else{
+            		curr = temp;
+            	}
             	curr = curr.next;
             	curr1 = curr1.next;
             }
             while(curr2!=null){
             	ListNode temp = null;
-            	System.out.println("curr2!=null");
+            	System.out.println("curr2!=null, curr2.val: "+curr2.val+" curr2.next"+curr2.next);
             	temp = curr2;
-            	curr.next = temp;
-            	curr = curr.next;
+            	if(curr != null){
+            		System.out.println("curr != null, curr.val: "+curr.val);
+            		curr.next = curr2;
+            		curr = curr.next;
+            	}
+            	else{
+            		System.out.println("curr != null else");
+            		curr = curr2;
+            	}
             	curr2 = curr2.next;
             }
         }
@@ -81,7 +104,7 @@ public class MergeKSortedLists {
     public static void main(String[] args){
     	MergeKSortedLists obj = new MergeKSortedLists();
     	
-    	ListNode n11 = new ListNode(1);
+/*    	ListNode n11 = new ListNode(1);
     	ListNode n12 = new ListNode(4);
     	ListNode n13 = new ListNode(5);
     	
@@ -94,9 +117,17 @@ public class MergeKSortedLists {
     	
     	n11.next = n12; n12.next=n13;
     	n21.next = n22; n22.next=n23;
+    	n31.next = n32;*/
+    	
+    	ListNode n11 = new ListNode(1);
+    	
+    	ListNode n21 = null;
+    	
+    	ListNode n31 = new ListNode(2);
+    	ListNode n32 = new ListNode(6);
+
     	n31.next = n32;
-    	
-    	
+
     	
 /*    	int[] arr = {0,1,2,3,4};
     	arr = Arrays.copyOfRange(arr, 1, 2);
