@@ -83,6 +83,12 @@ public class GenerateParentheses {
     	return cp;
     }
     
+  
+  public List<String> generateParenthesis(int n){
+  /*
+  Rule of generating parenthese is the number of right cannot be larger than the number of left
+  */
+  }
     public static void main(String[] args){
     	List<String> lstr = new ArrayList<String>();
     	GenerateParentheses obj = new GenerateParentheses();
