@@ -56,46 +56,38 @@ public class MergeKSortedLists {
         	while(curr1!=null && curr2!=null){
 
             	if(curr1.val<=curr2.val){
-            		curr = curr1;
+            		
+            		if(newHead == null){
+                		newHead = curr1;
+                		curr = newHead;
+                	}
+            		else{
+            			curr.next = curr1;
+            			curr = curr.next;
+            		}
             		curr1 = curr1.next;
             	}
             	else{
-            		curr = curr2;
+            		
+            		if(newHead == null){
+                		newHead = curr2;
+                		curr = newHead;
+                	}
+            		else{
+            			curr.next = curr2;
+            			curr = curr.next;
+            		}
             		curr2 = curr2.next;
             	}
-            	if(newHead == null){
-            		newHead = curr;
-            	}
-            	curr = curr.next;
+            	
             }
             
-            while(curr1!=null){
-            	ListNode temp = null;
-            	System.out.println("curr1!=null");
-            	temp = curr1;
-            	if(curr!=null){
-            		curr.next = temp;
-            	}
-            	else{
-            		curr = temp;
-            	}
-            	curr = curr.next;
-            	curr1 = curr1.next;
-            }
-            while(curr2!=null){
-            	ListNode temp = null;
-            	System.out.println("curr2!=null, curr2.val: "+curr2.val+" curr2.next"+curr2.next);
-            	temp = curr2;
-            	if(curr != null){
-            		System.out.println("curr != null, curr.val: "+curr.val);
-            		curr.next = curr2;
-            		curr = curr.next;
-            	}
-            	else{
-            		System.out.println("curr != null else");
-            		curr = curr2;
-            	}
-            	curr2 = curr2.next;
+        	if(curr1 !=null){
+        		curr.next = curr1;
+        	}
+           
+            if(curr2 != null){
+            	curr.next = curr2;
             }
         }
         return newHead;
@@ -125,8 +117,9 @@ public class MergeKSortedLists {
     	
     	ListNode n31 = new ListNode(2);
     	ListNode n32 = new ListNode(6);
+    	ListNode n33 = new ListNode(6);
 
-    	n31.next = n32;
+    	n31.next = n32;n32.next = n33;
 
     	
 /*    	int[] arr = {0,1,2,3,4};
