@@ -51,5 +51,19 @@ public class RemoveDuplicatesFromSortedArray {
         return len;
     }
     
-    
+    public int removeDuplicates2(int[] nums) {  //faster way
+        if(nums.length<=1) return nums.length;
+        int len = nums.length, i=0, j=1;
+        while(i<len && j<nums.length){
+        	if(nums[i]==nums[j]){
+        		j++; len--;
+        	}
+        	else{
+        		i++;
+        		nums[i]=nums[j];
+        		j++;
+        	}
+        }
+        return len;
+    }   
 }
