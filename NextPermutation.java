@@ -19,8 +19,10 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 Example:
 input [1,3,2]
 expected output: [2,1,3]
+
  */
 public class NextPermutation {
+    /* I'm referencing the algorithm at https://www.nayuki.io/page/next-lexicographical-permutation-algorithm */
     public void nextPermutation(int[] nums) {
     	if(nums.length==0 || nums.length==1){
     		return;
