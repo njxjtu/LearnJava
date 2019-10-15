@@ -20,9 +20,19 @@ Example:
 input [1,3,2]
 expected output: [2,1,3]
 
+Example:
+Input
+[1,5,1]
+Expected
+[5,1,1]
+
+Example:
+Input
+[5,4,7,5,3,2]
+Expected
+[5,5,2,3,4,7]
  */
 public class NextPermutation {
-    /* I'm referencing the algorithm at https://www.nayuki.io/page/next-lexicographical-permutation-algorithm */
     public void nextPermutation(int[] nums) {
     	if(nums.length==0 || nums.length==1){
     		return;
@@ -36,7 +46,32 @@ public class NextPermutation {
         	return;
         }
         else{
-        	pivot = i;
+        	pivot = i-1;
         }
+        i=nums.length-1;
+        while(i>pivot && nums[i]<=nums[pivot]){
+        	i--;
+        }
+        if(pivot<i){
+        	int tempn = nums[pivot];
+            nums[pivot] = nums[i];
+            nums[i] = tempn;
+            
+            for(int j=pivot+1, k=nums.length-1; j<(nums.length+pivot+1)/2 && k>j; j++,k--){
+            	tempn = nums[j];
+                nums[j] = nums[k];
+                nums[k] = tempn;
+            }
+            
+        }
+        
+        
+    }
+    
+    public static void main(String[] args){
+    	NextPermutation obj = new NextPermutation();
+    	int[] testarr = {1,3,2};
+    	obj.nextPermutation(testarr);
+    	System.out.println(Arrays.toString(testarr));
     }
 }
