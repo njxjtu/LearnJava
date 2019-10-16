@@ -20,29 +20,30 @@ Input:"((())))()())))(((()()(())))((()(())()((()))())())())()())))))))(((()(())(
  */
 public class LongestValidParentheses {
 	public int longestValidParentheses(String s) {
-    	int bottom = -1, maxlen =0 , i=0;
+    	int maxlen =0 , i=0;
     	if(s.length()==0 || s.length()==1){
     		return 0;
     	}
-        Stack<Character> stk = new Stack<Character>();
+        Stack<Integer> stk = new Stack<Integer>();
         while(i<s.length()){
         	if(stk.isEmpty()){
-        		stk.push(s.charAt(i));
-        		bottom=i;
+        		stk.push(i);
         	}
-        	else if(stk.peek().equals('(') && s.charAt(i)==')'){
+        	else if(s.charAt(stk.peek())=='(' && s.charAt(i)==')'){
         			stk.pop();
-        			if(i-bottom>maxlen){
-        				maxlen = i-bottom;
-        			};
+        			if(stk.isEmpty()){
+        				maxlen = i+1;
+        			}
+        			else if(!stk.isEmpty() && i-stk.peek()>maxlen){
+        				maxlen = i-stk.peek();
+        			}
         	}
         	else {
-        		stk.push(s.charAt(i));
-        		len++;
-        		if(len>maxlen){maxlen = len;}
+        		stk.push(i);
         	}
+        	i++;
         }
-        return len;
+        return maxlen;
     }
 	
 	public int longestValidParentheses2(String s) {
@@ -82,6 +83,6 @@ public class LongestValidParentheses {
     
     public static void main(String[] args){
     	LongestValidParentheses obj = new LongestValidParentheses();
-    	System.out.println(obj.longestValidParentheses("(()"));
+    	System.out.println(obj.longestValidParentheses("()()"));
     }
 }
