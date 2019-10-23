@@ -51,7 +51,73 @@ The given board size is always 9x9.
  */
 public class ValidSudoku {
     public boolean isValidSudoku(char[][] board) {
-        boolean sign = false;
-        return sign;
+        //check rows
+    	for(int i=0; i<board.length; i++){
+    		if(!isValid9(board[i])){
+    			return false;
+    		}
+    	}
+    	//check columns
+    	for(int j=0; j<board.length; j++){
+    		char[] tempc = new char[9];
+    		for(int k=0; k<board.length; k++){
+    			tempc[k]=board[k][j];
+    		}
+    		if(!isValid9(tempc)){
+    			return false;
+    		}
+    	}
+    	//check subgrids
+    	for(int i=0; i<9; i+=3){
+    		for(int j=0; j<9; j+=3){
+    			char[] tempc = new char[9];
+    			int k=0;
+    			for(int p=i; p<i+3; p++){
+    				for(int q=j; q<j+3; q++){
+    					tempc[k]=board[p][q];
+    					k++;
+    				}
+    			}
+    			if(!isValid9(tempc)){
+    				return false;
+    			}
+    		}
+    	}
+    	return true;
+    }
+  
+    boolean isValid9(char[] carr){
+    	int[] count = new int[10];
+    	for(int i=0; i<10; i++){
+    		count[i] = 0;
+    	}
+    	for(int i=0; i<carr.length; i++){
+    		if(carr[i]=='.'){
+    			continue;
+    		}
+    		else if(count[Character.getNumericValue(carr[i])]>=1){
+    			return false;
+    		}
+    		else if(count[Character.getNumericValue(carr[i])]==0){
+    			count[Character.getNumericValue(carr[i])]++;
+    		}
+    	}
+    	return true;
+    }
+    
+    public static void main(String[] args){
+    	ValidSudoku obj = new ValidSudoku();
+    	char[][] board = {
+    			  {'5','3','.','.','7','.','.','.','.'},
+    			  {'6','.','.','1','9','5','.','.','.'},
+    			  {'.','9','8','.','.','.','.','6','.'},
+    			  {'8','.','.','.','6','.','.','.','3'},
+    			  {'4','.','.','8','.','3','.','.','1'},
+    			  {'7','.','.','.','2','.','.','.','6'},
+    			  {'.','6','.','.','.','.','2','8','.'},
+    			  {'.','.','.','4','1','9','.','.','5'},
+    			  {'.','.','.','.','8','.','.','7','9'}
+    			};
+    	System.out.println(obj.isValidSudoku(board));
     }
 }
