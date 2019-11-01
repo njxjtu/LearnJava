@@ -13,7 +13,7 @@ Empty cells are indicated by the character '.'.
 A sudoku puzzle...
 
 
-...and its solution numbers marked in red.
+...and its solution numbers marked in red:
 
 Note:
 
