@@ -15,7 +15,26 @@ Empty cells are indicated by the character '.'.
 
 
 A sudoku puzzle...
-
+{{'5','3','.','.','7','.','.','.','.'},
+ {'6','.','.','1','9','5','.','.','.'},
+ {'.','9','8','.','.','.','.','6','.'},
+ {'8','.','.','.','6','.','.','.','3'},
+ {'4','.','.','8','.','3','.','.','1'},
+ {'7','.','.','.','2','.','.','.','6'},
+ {'.','6','.','.','.','.','2','8','.'},
+ {'.','.','.','4','1','9','.','.','5'},
+ {'.','.','.','.','8','.','.','7','9'}}
+ 
+ Expected output:
+ {{'5','3','4','6','7','8','9','1','2'},
+ {'6','7','2','1','9','5','3','4','8'},
+ {'1','9','8','3','4','2','5','6','7'},
+ {'8','5','9','7','6','1','4','2','3'},
+ {'4','2','6','8','5','3','7','9','1'},
+ {'7','1','3','9','2','4','8','5','6'},
+ {'9','6','1','5','3','7','2','8','4'},
+ {'2','8','7','4','1','9','6','3','5'},
+ {'3','4','5','2','8','6','1','7','9'}}
 
 ...and its solution numbers marked in red.
 
@@ -45,33 +64,32 @@ public class SudokuSolver {
     }
 
     boolean fillGrid(char[][] board){
-    	System.out.println("In fillGrid ");
-    	boolean fill = true;
-    	char[] candi={'1','2','3','4','5','6','7','8','9'};
-    	int k =0, p=-1, q=-1;
+    	int  p=-1, q=-1, found=0;
     	for(int i=0; i<9; i++){
     		for(int j=0; j<9; j++){
-    			if(board[i][j]<'1'){
+    			if(board[i][j]=='.'){
     				p=i;
     				q=j;
     			}
     		}
     		
     	}
-    	System.out.println("p: "+p+" q: "+q);
     	if(p!=-1){
-    		for(k=0; k<9;k++){
-    			board[p][q]=candi[k];
-    			System.out.println("k: "+k);
-    			System.out.println("validSudoku: "+isValidSudoku(board));
-    			if(isValidSudoku(board)&&fillGrid(board)){
-    				System.out.println(" both valid");
+    		for(char k='1'; k<='9';k++){
+    			board[p][q]=k;
+    			
+    			if(isValidSudoku(board) && fillGrid(board)){
     				return true;}
-    		}
+    			else{
+    					board[p][q]='.';
+    				};
+    			}
+    		return false;
     		
     	}
-    		
-    	return fill;
+    	else{
+    		return true;
+    	}
     }
     
     boolean isValidSudoku(char[][] board) {
@@ -115,8 +133,6 @@ public class SudokuSolver {
     		count[i] = 0;
     	}
     	for(int i=0; i<carr.length; i++){
-    		//System.out.println("i: "+i+" carr[i]: "+carr[i]);
-    		//System.out.println("Character.getNumericValue(carr[i]): "+Character.getNumericValue(carr[i]));
     		if(carr[i]=='.'){
     			continue;
     		}
@@ -132,17 +148,15 @@ public class SudokuSolver {
     
     public static void main(String[] args){
     	SudokuSolver obj = new SudokuSolver();
-    	char[][] board = {
-  			  {'3', '1', '.', '.', '7', '8', '4', '9', '2'},
-  			  {'5', '2', '9', '1', '3', '4', '7', '6', '8'},
-  			  {'4', '8', '7', '6', '2', '9', '5', '3', '1'},
-  			  {'2', '6', '3', '4', '1', '5', '9', '8', '7'},
-  			  {'9', '7', '4', '8', '6', '3', '1', '2', '5'},
-  			  {'8', '5', '1', '7', '9', '2', '6', '4', '3'},
-  			  {'1', '3', '8', '9', '4', '7', '2', '5', '6'},
-  			  {'6', '9', '2', '3', '5', '1', '8', '7', '4'},
-  			  {'7', '4', '5', '2', '8', '6', '3', '1', '9'}
-  			};
+    	char[][] board =  {{'5','3','.','.','7','.','.','.','.'},
+    			 {'6','.','.','1','9','5','.','.','.'},
+    			 {'.','9','8','.','.','.','.','6','.'},
+    			 {'8','.','.','.','6','.','.','.','3'},
+    			 {'4','.','.','8','.','3','.','.','1'},
+    			 {'7','.','.','.','2','.','.','.','6'},
+    			 {'.','6','.','.','.','.','2','8','.'},
+    			 {'.','.','.','4','1','9','.','.','5'},
+    			 {'.','.','.','.','8','.','.','7','9'}};
     	obj.solveSudoku(board);
     	for(int i=0; i<9; i++){
     		for(int j=0; j<9; j++){
