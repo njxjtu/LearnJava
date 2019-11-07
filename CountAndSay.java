@@ -29,6 +29,41 @@ Output: "1211"
 public class CountAndSay {
     public String countAndSay(int n) {
         String rlt = "";
+        StringBuilder sb = new StringBuilder();
+        if(n<1) return rlt;
+        if(n==1) rlt = "1";
+        if(n>1){
+        	
+        	String tempstr = countAndSay(n-1);
+        	int pos=0, count=0;
+        	char tempch =tempstr.charAt(pos);
+        	while(pos<tempstr.length()){
+        		if(tempstr.charAt(pos)==tempch){
+        			count++;
+        			pos++;
+        		}
+        		else{
+        			if(count>0){
+        				sb.append((char)(count+'0'));
+        				sb.append(tempch);
+        				count=0;
+        			}
+        			tempch=tempstr.charAt(pos);
+        			count++;
+        			pos++;
+        		}
+        	}
+        	sb.append((char)(count+'0'));
+			sb.append(tempch);
+			count=0;
+			
+        	rlt = sb.toString();
+        }
         return rlt;
+    }
+    
+    public static void main(String[] args){
+    	CountAndSay obj = new CountAndSay();
+    	System.out.println(obj.countAndSay(5));
     }
 }
