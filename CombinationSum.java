@@ -1,5 +1,7 @@
 package LearnJava;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -31,6 +33,17 @@ A solution set is:
  */
 public class CombinationSum {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ll = new ArrayList<List<Integer>>();
+        if(candidates.length==0) {
+        	return ll;
+        }
+        else {
+        	Arrays.sort(candidates);
+        }
+        for(int i=0; i<candidates.length;i++) {
+        	
+        }
         
+        return ll;
     }
 }
