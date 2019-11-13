@@ -32,18 +32,52 @@ A solution set is:
 ]
  */
 public class CombinationSum {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> ll = new ArrayList<List<Integer>>();
+     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    	List<List<Integer>> ll = new ArrayList<List<Integer>>();
         if(candidates.length==0) {
         	return ll;
         }
+        else if(candidates.length==1){
+        	if(candidates[0]==target){
+        		List<Integer> templi = new ArrayList<Integer>();
+        		templi.add(candidates[0]);
+        		ll.add(templi);
+        	}
+        }
         else {
         	Arrays.sort(candidates);
-        }
-        for(int i=0; i<candidates.length;i++) {
+        	
+        	for(int i=0; i<candidates.length;i++) {
+            	if(candidates[i]<=target){
+            		List<List<Integer>> templl = new ArrayList<List<Integer>>();
+            		int[] tempcandi = Arrays.copyOfRange(candidates, i+1, candidates.length);
+            		templl = combinationSum(tempcandi, target-candidates[i]);
+
+            		for(List<Integer> lis : templl){
+            			lis.add(candidates[i]);
+            			ll.add(lis);
+            		}
+            		
+            	}
+            }
         	
         }
         
+        
         return ll;
+    }
+    
+    public static void main(String[] args){
+    	CombinationSum obj = new CombinationSum();
+    	List<List<Integer>> ll = new ArrayList<List<Integer>>();
+    	int[] candidates= {2,3,6,7};
+    	int target = 7;
+    	ll = obj.combinationSum(candidates, target);
+    	for(List<Integer> lis : ll){
+			for(int i: lis){
+				System.out.print(i+", ");
+			}
+			System.out.println(" ");
+		}
     }
 }
