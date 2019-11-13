@@ -38,32 +38,39 @@ public class CombinationSum {
         	return ll;
         }
         else if(candidates.length==1){
-        	if(candidates[0]==target){
+        	if(target%candidates[0]==0){
         		List<Integer> templi = new ArrayList<Integer>();
-        		templi.add(candidates[0]);
+        		for(int i=0; i<target/candidates[0]; i++){
+        			templi.add(candidates[0]);
+        		}
         		ll.add(templi);
         	}
         }
         else {
-        	Arrays.sort(candidates);
-        	
         	for(int i=0; i<candidates.length;i++) {
             	if(candidates[i]<=target){
             		List<List<Integer>> templl = new ArrayList<List<Integer>>();
             		int[] tempcandi = Arrays.copyOfRange(candidates, i+1, candidates.length);
-            		templl = combinationSum(tempcandi, target-candidates[i]);
-
-            		for(List<Integer> lis : templl){
-            			lis.add(candidates[i]);
-            			ll.add(lis);
-            		}
             		
+            		List<Integer> templi = new ArrayList<Integer>();
+            		int sum = 0;
+            		for(int j=0; j<target/candidates[i]; j++){
+            			templi.add(candidates[i]);
+            			sum = sum + candidates[i];
+            			templl = combinationSum(tempcandi, target-sum);
+
+            			if(templl.isEmpty() && target%candidates[i]==0 && j==target/candidates[i]-1){
+            				ll.add(templi);
+            			}
+            			for(List<Integer> lis : templl){
+                			lis.addAll(templi);
+                			ll.add(lis);
+                		}
+            		}
             	}
             }
-        	
         }
-        
-        
+       
         return ll;
     }
     
