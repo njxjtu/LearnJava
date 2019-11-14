@@ -1,6 +1,7 @@
 package LearnJava;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
@@ -44,9 +45,50 @@ public class CombinationSum2 {
     			setOfList.add(tempList);
     	}
     	else if(candidates.length>1){
+    		Arrays.sort(candidates); //2, 3
+    		int pos = 0, pos2=0, sum=0;
+    		while(pos<candidates.length){
+    			List<List<Integer>> tempSetOfList = new ArrayList<List<Integer>>();
+    			List<Integer> tempList = new ArrayList<Integer>();
+
+    			pos2 = pos;
+    			while(pos2<candidates.length && candidates[pos2]==candidates[pos]){
+    				pos2++;
+    			}
+    			int[] tempcandi = Arrays.copyOfRange(candidates, pos2, candidates.length);
+    			System.out.println("pos: "+pos+" pos2: "+pos2);
+    			while(pos<pos2){
+    				System.out.println("in while of pos<pos2");
+    				
+        			tempSetOfList = combinationSum2(tempcandi, target-sum);
+        			
+    				for(List<Integer> tli : tempSetOfList){
+        				tli.addAll(tempList);
+        				setOfList.add(tli);
+        			}
+    				
+    				tempList.add(candidates[pos]);
+        			sum = sum + candidates[pos];
+        			pos++;
+    			}
+    			pos++;
+    		}
     		
     	}
     	return setOfList;
     }	
 
+    public static void main(String[] args){
+    	CombinationSum2 obj = new CombinationSum2();
+    	List<List<Integer>> setOfList = new ArrayList<List<Integer>>();
+    	int[] candidates = {2,3};
+    	int target = 5;
+    	setOfList = obj.combinationSum2(candidates, target);
+    	for(List<Integer> li : setOfList){
+    		for(int i : li){
+    			System.out.print(i+", ");
+    		}
+    		System.out.println(" ");
+    	}
+    }
 }
