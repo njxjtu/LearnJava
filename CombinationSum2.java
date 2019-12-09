@@ -15,6 +15,7 @@ The solution set must not contain duplicate combinations.
 Example 1:
 
 Input: candidates = [10,1,2,7,6,1,5], target = 8,
+sorted list: [1, 1, 2, 5, 6, 7, 10]
 A solution set is:
 [
   [1, 7],
@@ -36,85 +37,101 @@ public class CombinationSum2 {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
     	List<List<Integer>> setOfList = new ArrayList<List<Integer>>();
     	
+    	
     	if(candidates.length==0){
     		return setOfList;
     	}
-    	else if(candidates.length==1 && candidates[0]==target){
-    			List<Integer> tempList = new ArrayList<Integer>();
+    	else if(candidates.length==1){
+    		List<Integer> tempList = new ArrayList<Integer>();
+    		if(candidates[0]==target){
     			tempList.add(candidates[0]);
     			setOfList.add(tempList);
+    		}
+    		return setOfList;
     	}
     	else if(candidates.length>1){
-    		Arrays.sort(candidates); //2, 3
-    		for(int k=0; k<candidates.length;k++){
-    			System.out.print(candidates[k]+", ");
-    		}
-    		System.out.println(" ");
+    		Arrays.sort(candidates); 
     		int pos = 0, pos2=0, sum=0;
+    		List<Integer> tempList1 = new ArrayList<Integer>();
     		while(pos<candidates.length){
-    			List<List<Integer>> tempSetOfList = new ArrayList<List<Integer>>();
-    			List<Integer> tempList = new ArrayList<Integer>();
-
-    			pos2 = pos;
-    			while(pos2<candidates.length && candidates[pos2]==candidates[pos]){
-    				pos2++;
-    			}
-    			int[] tempcandi = Arrays.copyOfRange(candidates, pos2, candidates.length);
-    			System.out.println("tempcandi: ");
-    			for(int k=0; k<tempcandi.length;k++){
-        			System.out.print(tempcandi[k]+", ");
+    			System.out.println("**********while loop********* " +" pos: "+pos);
+    			while(pos2>=pos && pos2<candidates.length && candidates[pos2]==candidates[pos]){
+        			pos2++;
         		}
-        		System.out.println(" ");
-    			System.out.println("pos: "+pos+" pos2: "+pos2);
-    			while(pos<pos2){
-    				System.out.println("in while of pos<pos2");
-    				tempSetOfList = combinationSum2(tempcandi, target-sum);
-    				if(tempSetOfList.isEmpty()){
-        				System.out.println("tempSetOfList is empty - 1");
-        			}
-    				else{
-    					for(List<Integer> tli : tempSetOfList){
-            				tli.addAll(tempList);
-            				setOfList.add(tli);
-            			}
-    				}
-    				
-    				tempList.add(candidates[pos]);
-        			sum = sum + candidates[pos];
-        			tempSetOfList = combinationSum2(tempcandi, target-sum);
-        			if(tempSetOfList.isEmpty()){
-        				System.out.println("tempSetOfList is empty - 2");
-        				tempList.add(candidates[pos]);
-        			}
-        			else{
-        				for(List<Integer> tli : tempSetOfList){
-        					System.out.println("In the second for loop");
-            				tli.addAll(tempList);
-            				setOfList.add(tli);
-            			}
-        			}
-        			if(tempSetOfList.isEmpty() && target==candidates[pos]){
-        				tempList.add(candidates[pos]); 
-        				setOfList.add(tempList);
-        				break;
-        			}
-    				
-        			pos++;
+    			System.out.println("pos2: "+pos2);
+    			//
+    			
+    			if(pos-1>=0 && candidates[pos-1]!=candidates[pos]){
+    				sum = 0;
+    				tempList1.clear();
     			}
-    			setOfList.add(tempList);
-    			pos++;
+    			System.out.println("Sum: "+sum);
+    			System.out.println(" At beginning ");
+        		for(List<Integer> li : setOfList){
+        			System.out.println(" tier-1 ");
+    	    		for(int i : li){
+    	    			System.out.print(i+", ");
+    	    		}
+    	    		System.out.println(" ");
+    	    	}
+    			List<List<Integer>> tempSetOfList = new ArrayList<List<Integer>>();
+    			//
+    			if(candidates[pos]+sum<=target){
+    				System.out.println("if(candidates[pos]+sum<=target) ");
+    				sum = candidates[pos]+sum;
+    				System.out.println("In if - Sum: "+sum);
+    				tempList1.add(candidates[pos]);
+
+					int[] tempcandi = Arrays.copyOfRange(candidates, pos2, candidates.length);
+    				for(int k: tempcandi){System.out.println("k: "+k);}
+    				if(tempcandi.length>0){
+    					tempSetOfList = combinationSum2(tempcandi, target-sum);
+    				}
+    				if(tempSetOfList.isEmpty() || (!tempSetOfList.isEmpty() && tempSetOfList.get(0).isEmpty())){
+    					System.out.println("tempSetOfList.isEmpty ");
+    					if(sum == target ){
+    						System.out.println("if(sum == target && pos-1>=0) ");
+    						//tempList1.add(candidates[pos]);
+    						setOfList.add(tempList1);
+    					}
+    				}
+    				else{
+    					System.out.println("tempSetOfList.is not Empty "+tempSetOfList.get(0));
+    					for(List<Integer> tli : tempSetOfList){
+    						for(int k: tempList1){System.out.println("each of tempList: "+k);}
+        					for(int k: tli){System.out.println("each of tli: "+k);}
+            				tempList1.addAll(tli);//tli.addAll(tempList);
+            				for(int k: tempList1){System.out.println("after add - each of tempList: "+k);}
+            				setOfList.add(tempList1);
+            				for(List<Integer> li : setOfList){
+            		    		for(int i : li){
+            		    			System.out.print(i+", ");
+            		    		}
+            		    		System.out.println(" ");
+            		    	}
+                			}
+    				}
+    			}
+        		pos++;
+    			}
+    		System.out.println(" Before returning back ");
+    		for(List<Integer> li : setOfList){
+	    		for(int i : li){
+	    			System.out.print(i+", ");
+	    		}
+	    		System.out.println(" ");
+	    	}
     		}
-    		
-    	}
     	return setOfList;
     }	
 
     public static void main(String[] args){
     	CombinationSum2 obj = new CombinationSum2();
     	List<List<Integer>> setOfList = new ArrayList<List<Integer>>();
-    	int[] candidates = {2,2};
-    	int target = 4;
+    	int[] candidates = {1,2,3};
+    	int target = 3;
     	setOfList = obj.combinationSum2(candidates, target);
+    	System.out.println("====================== ");
     	for(List<Integer> li : setOfList){
     		for(int i : li){
     			System.out.print(i+", ");
