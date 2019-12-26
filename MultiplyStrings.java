@@ -18,13 +18,30 @@ You must not use any built-in BigInteger library or convert the inputs to intege
  */
 public class MultiplyStrings {
     public String multiply(String num1, String num2) {
-        String mp ="0";
-        System.out.println(21);
-        return mp;
+    	if(num1.equals("0") || num2.equals("0")){
+    		return "0";
+    	}
+        int[] multiRes = new int[num1.length()+num2.length()-1];
+        for(int i=0; i<num1.length(); i++){
+        	for(int j=0; j<num2.length(); j++){
+        		multiRes[i+j]=multiRes[i+j]+(num1.charAt(i)-'0')*(num2.charAt(j)-'0');
+        	}
+        }
+        
+        for(int i=multiRes.length-1; i>0; i--){
+        	multiRes[i-1] = multiRes[i-1]+ multiRes[i]/10;
+        	multiRes[i]=multiRes[i]%10;
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        for(int i : multiRes){
+        	sb.append(i);
+        }
+        return sb.toString();
     }
     
     public static void main(String[] args){
     	MultiplyStrings obj = new MultiplyStrings();
-    	obj.multiply("1", "2");
+    	System.out.println(obj.multiply("160", "0"));
     }
 }
