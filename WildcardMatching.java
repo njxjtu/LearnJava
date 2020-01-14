@@ -39,6 +39,7 @@ class Solution {
     						j++;
     					}
     				}
+                    return false;
     		    }
     			else{
     				return false;
