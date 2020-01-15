@@ -1,4 +1,4 @@
-package LearnJava;
+package LearnJava; // 1. recursion 2. DP
 /*
 Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*'.
 
@@ -66,6 +66,72 @@ Example 9:
 "b**bb**a**bba*b**a*bbb**aba***babbb*aa****aabb*bbb***a"
  */
 public class WildcardMatching {
+    
+    /* Recursion - begin
+    public boolean isMatch(String s, String p) {
+    	StringBuilder sb = new StringBuilder();
+    	for(int i=0; i<p.length(); i++){
+    		if(i-1>=0 && p.charAt(i)=='*' && p.charAt(i-1)=='*'){
+    			continue;
+    		}
+    		else{
+    			sb.append(p.charAt(i));
+    		}
+    	}
+    	p = sb.toString();
+    	if(s.isEmpty()){
+    		if(p.isEmpty() || p.equals("*")){
+    			return true;
+    		}
+    		else {
+    			return false;
+    		}
+    	}
+    	else{
+    		int j=0;
+    		for(int i=0; i<p.length(); i++){
+    			if(j>=s.length() && p.charAt(i)!='*'){return false;}
+    			if(j==s.length() && p.charAt(i)=='*' && i==p.length()-1){return true;}
+    			if(p.charAt(i)>='a' && p.charAt(i)<='z' && p.charAt(i)==s.charAt(j)){
+    				j++;
+    				continue;
+    			}
+    			else if(p.charAt(i)>='a' && p.charAt(i)<='z' && p.charAt(i)!=s.charAt(j)){
+    				return false;
+    			}
+    			else if(p.charAt(i)=='?' && j<s.length()){
+    		    	j++; 
+    		    	continue;
+    		    }
+    			else if(p.charAt(i)=='*'){
+    				if(isMatch(s.substring(j, s.length()),p.substring(i+1, p.length()))){
+    					return true;
+    				}
+    				while(j<s.length() && s.charAt(j)>='a' && s.charAt(j)<='z' ){
+    					if(j==s.length()-1 && i==p.length()-1){
+    						return true;
+    					}
+    					else if(j+1<s.length() && isMatch(s.substring(j+1, s.length()),p.substring(i+1, p.length()))){
+        					return true;
+        				}
+    					else{
+    						j++;
+    					}
+    				}
+    				return false; //
+    		    }
+    			else{
+    				return false;
+    			}
+    		}
+    		if(j<s.length() ){return false;}
+    		else{return true; }
+    		
+    	}
+        
+    }
+    //Recursion - end
+    */
     public boolean isMatch(String s, String p) {
     	boolean[][] tab = new boolean[s.length()][p.length()];
     	return tab[s.length()-1][p.length()-1];
