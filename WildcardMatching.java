@@ -133,8 +133,35 @@ public class WildcardMatching {
     //Recursion - end
     */
     public boolean isMatch(String s, String p) {
-    	boolean[][] tab = new boolean[s.length()][p.length()];
-    	return tab[s.length()-1][p.length()-1];
+    	boolean[][] tab = new boolean[s.length()+1][p.length()+1];
+    	//set initial state
+    	tab[0][0] = true;
+    	tab[1][0] = false;
+    	if(p.charAt(0)=='*'){
+    		tab[0][1]=true;
+    	}
+    	else{
+    		tab[0][1]=false;
+    	}
+    	//fill the boolean table
+    	for(int i=1; i<=s.length(); i++){
+    		for(int j=1; j<=p.length(); j++){
+    			if(p.charAt(j-1)>='a' && p.charAt(j-1)<='z' && s.charAt(i-1)==p.charAt(j-1) || p.charAt(j-1)=='?'){
+    				tab[i][j]=tab[i-1][j-1];
+    			}
+    			else if(p.charAt(j-1)=='*'){
+    				tab[i][j]= tab[i][j-1] || tab[i-1][j];
+    			}
+    		}
+    	}
+    	
+    	/*for(int i=0; i<=s.length();i++){
+    		System.out.println("");
+    		for(int j=0; j<p.length(); j++){
+    			System.out.print(tab[i][j]+", ");
+    		}
+    	}*/
+    	return tab[s.length()][p.length()];
         
     }
     
