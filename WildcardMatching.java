@@ -1,4 +1,4 @@
-package LearnJava; // 1. recursion 2. DP
+package LearnJava;
 /*
 Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*'.
 
@@ -61,14 +61,27 @@ Example 8:
 s = "aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba"
 p = "a*******b"
 false
+
 Example 9:
 "babbbbaabababaabbababaababaabbaabababbaaababbababaaaaaabbabaaaabababbabbababbbaaaababbbabbbbbbbbbbaabbb"
 "b**bb**a**bba*b**a*bbb**aba***babbb*aa****aabb*bbb***a"
+
+Example 10:
+""
+""
+true
+
+Example 11:
+""
+"*"
+true
+
+Example 12:
+"ho"
+"**ho"
  */
 public class WildcardMatching {
-    
-    /* Recursion - begin
-    public boolean isMatch(String s, String p) {
+/*    public boolean isMatch(String s, String p) {
     	StringBuilder sb = new StringBuilder();
     	for(int i=0; i<p.length(); i++){
     		if(i-1>=0 && p.charAt(i)=='*' && p.charAt(i-1)=='*'){
@@ -130,27 +143,62 @@ public class WildcardMatching {
     	}
         
     }
-    //Recursion - end
+    
     */
-    public boolean isMatch(String s, String p) {
+	/* Dynamic Programming */
+	public boolean isMatch(String s, String p) {
     	boolean[][] tab = new boolean[s.length()+1][p.length()+1];
+    	boolean signal;
+    	
+    	// s and p are empty
+    	if(s.length()==0 && p.length()==0){
+    		return true;
+    	}
+    	
     	//set initial state
     	tab[0][0] = true;
-    	tab[1][0] = false;
-    	if(p.charAt(0)=='*'){
-    		tab[0][1]=true;
+    	if(s.length()>=1){
+    		for(int i=1; i<=s.length(); i++){
+    			tab[i][0] = false;
+    			signal = tab[i][0];
+    		}
     	}
-    	else{
-    		tab[0][1]=false;
+    	if(p.length()>=1){
+    		if(p.charAt(0)=='*'){
+    			tab[0][1] = true;
+    			signal = tab[0][1];
+        	}
+        	else{
+        		tab[0][1]=false;
+        		signal = tab[0][1];
+        	}
+    		for(int i=1; i<=p.length(); i++){
+    			if(p.charAt(i-1)=='*'){
+    				tab[0][i] = tab[0][i-1];
+    				signal = tab[0][i];
+    			}
+    			else{
+    				tab[0][i] = false;
+    				signal = tab[0][i];
+    			}
+    		}
     	}
+    	
     	//fill the boolean table
+    	
     	for(int i=1; i<=s.length(); i++){
     		for(int j=1; j<=p.length(); j++){
     			if(p.charAt(j-1)>='a' && p.charAt(j-1)<='z' && s.charAt(i-1)==p.charAt(j-1) || p.charAt(j-1)=='?'){
     				tab[i][j]=tab[i-1][j-1];
+    				signal = tab[i][j];
     			}
     			else if(p.charAt(j-1)=='*'){
     				tab[i][j]= tab[i][j-1] || tab[i-1][j];
+    				signal = tab[i][j];
+    			}
+    			else{
+    				tab[i][j]=false;
+    				signal = tab[i][j];
     			}
     		}
     	}
@@ -164,16 +212,18 @@ public class WildcardMatching {
     	return tab[s.length()][p.length()];
         
     }
-    
+	
     public static void main(String[] args){
     	WildcardMatching obj = new WildcardMatching();
-    	/*System.out.println(obj.isMatch("aa", "a")); //false
-    	System.out.println(obj.isMatch("aa", "*")); //true
+    	//System.out.println(obj.isMatch("aa", "a")); //false
+    	System.out.println("Result: "+obj.isMatch("aa", "*")); //true
     	System.out.println(obj.isMatch("cb", "?a")); //false
     	System.out.println(obj.isMatch("adceb", "*a*b")); //true
     	System.out.println(obj.isMatch("acdcb", "a*c?b")); //false
     	System.out.println(obj.isMatch("mississippi", "m??*ss*?i*pi")); //false
     	System.out.println(obj.isMatch("aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba", "a*******b")); //false
-*/    	System.out.println(obj.isMatch("babbbbaabababaabbababaababaabbaabababbaaababbababaaaaaabbabaaaabababbabbababbbaaaababbbabbbbbbbbbbaabbb", "b**bb**a**bba*b**a*bbb**aba***babbb*aa****aabb*bbb***a")); //
-    	}
+    	System.out.println(obj.isMatch("babbbbaabababaabbababaababaabbaabababbaaababbababaaaaaabbabaaaabababbabbababbbaaaababbbabbbbbbbbbbaabbb", "b**bb**a**bba*b**a*bbb**aba***babbb*aa****aabb*bbb***a")); //false
+    	
+    	System.out.println(obj.isMatch("ho", "*ho")); //true
+    }
 }
