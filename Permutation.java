@@ -1,4 +1,7 @@
 package LearnJava;
+
+import java.util.*;
+
 /*
 Given a collection of distinct integers, return all possible permutations.
 
@@ -16,5 +19,47 @@ Output:
 ]
  */
 public class Permutation {
-
+    public List<List<Integer>> permute(int[] nums) {
+    	List<List<Integer>> lli = new ArrayList<List<Integer>>();
+    	
+    	if(nums.length==0){return lli;}
+    	if(nums.length==1){
+    		List<Integer> li = new ArrayList<Integer>();
+    		li.add(nums[0]);
+    		lli.add(li);
+    		return lli;
+        }
+    	else {
+    		for(int i : nums){
+    			int[] temparr = new int[nums.length-1];
+    			int j=0;
+        		for(int k=0; k<nums.length; k++){
+        			if(nums[k]!=nums[i]){
+        				temparr[j]=nums[k];
+        				j++;
+        			}
+        		}
+        		lli = permute(temparr);
+        		for(List<Integer> x : lli){
+        			x.add(nums[i]);
+        		}
+        		return lli;
+        	}
+    	}
+    	
+    	return lli;
+    }
+    
+    public static void main(String[] args){
+    	Permutation obj = new Permutation();
+    	int[] nums = {1,2,3};
+    	List<List<Integer>> rlli =  obj.permute(nums);
+    	for(int i=0; i<rlli.size(); i++){
+    		System.out.println("");
+    		for(int j=0; j<nums.length; j++){
+    			System.out.println(rlli.get(i).get(j)+", ");
+    		}
+    	}
+    	
+    }
 }
