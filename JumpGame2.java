@@ -24,6 +24,18 @@ output: 2
 Example 3:
 input: [2,1,4,2,6,4]
 output: 2
+
+Example 4:
+[5,9,3,2,1,0,2,3,3,1,0,0]
+output: 3
+
+Example 5:
+[8,0,8,5,0,1,1,0,9,4,1,5,1,3,8,0,3,2,2,7,1,7,3,4,5,3,6,1,1,6,7,9,7,5,5,9,8,6,9,7,2,2,5,5,5,3,8,0,5,0,9,9,0,3]
+output: 8
+
+Example 6:
+[5,9,3,2,1,0,2,3,3,1,0,0]
+output: 3
  */
 public class JumpGame2 {
 /*    public int jump(int[] nums) {
@@ -54,15 +66,20 @@ public class JumpGame2 {
 		   }
 		   else if(nums[i]==0){
 			   arr[i]=Integer.MAX_VALUE;
+			   continue;
 		   }
 		   else{
-			   int minc = arr[i+1]+1;
+			   int minc =Integer.MAX_VALUE ;
+
 			   for(int j=1; j<=nums[i]; j++){
-				   if(i+j<nums.length && 1 + arr[i+j] < minc){
+				   if(i+j<nums.length &&  nums[i+j] != 0 && arr[i+j]< Integer.MAX_VALUE && 1 + arr[i+j] < minc){
 					   minc = 1 + arr[i+j];
-					   arr[i] = minc;
+				   }
+				   if(i+j<nums.length &&  arr[i+j] == 0 ){
+					   minc = 1 + arr[i+j];
 				   }
 			   }
+			   arr[i] = minc;
 		   }
 	   }
 	   
@@ -73,10 +90,14 @@ public class JumpGame2 {
     }
     
   public static void main(String[] args){
-	  int[] nums = {2,3,1,1,4};
+	  //int[] nums = {2,3,1,1,4};
 	  //int[] nums = {2,3,1};
 	  //int[] nums = {2,1,4,2,6,4};
-	  //int[] nums = {5,6,4,4,6,9,4,4,7,4,4,8,2,6,8,1,5,9,6,5,2,7,9,7,9,6,9,4,1,6,8,8,4,4,2,0,3,8,5};
+	  //int[] nums = {2,0,3};
+	  //int[] nums = {8,1,0,0};
+	  int[] nums = {8,0,8,5,0,1,1,0,9,4,1,5,1,3,8,0,3,2,2,7,1,7,3,4,5,3,6,1,1,6,7,9,7,5,5,9,8,6,9,7,2,2,5,5,5,3,8,0,5,0,9,9,0,3};
+	  //int[] nums = {2,1,0,2};
+	  //int[] nums = {5,9,3,2,1,0,2,3,3,1,0,0};
 	  JumpGame2 obj = new JumpGame2();
 	  
 	  int result = obj.jump(nums);
