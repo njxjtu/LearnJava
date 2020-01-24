@@ -30,7 +30,7 @@ public class Permutation {
     		return lli;
         }
     	else {
-    		for(int i : nums){
+    		for(int i=0; i<nums.length; i++){
     			int[] temparr = new int[nums.length-1];
     			int j=0;
         		for(int k=0; k<nums.length; k++){
@@ -43,7 +43,6 @@ public class Permutation {
         		for(List<Integer> x : lli){
         			x.add(nums[i]);
         		}
-        		return lli;
         	}
     	}
     	
@@ -52,7 +51,7 @@ public class Permutation {
     
     public static void main(String[] args){
     	Permutation obj = new Permutation();
-    	int[] nums = {1,2,3};
+    	int[] nums = {4,5};
     	List<List<Integer>> rlli =  obj.permute(nums);
     	for(int i=0; i<rlli.size(); i++){
     		System.out.println("");
