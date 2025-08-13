@@ -1,3 +1,0 @@
-# LearnJava
-
-Learn Java - Excercises 
