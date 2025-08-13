@@ -11,6 +11,8 @@ Output: 7 -> 0 -> 8
 Explanation: 342 + 465 = 807.
 */
 
+import java.util.ArrayList;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -19,6 +21,12 @@ Explanation: 342 + 465 = 807.
  *     ListNode(int x) { val = x; }
  * }
  */
+
+class ListNode {
+	      int val;
+	      ListNode next;
+	      ListNode(int x) { val = x; }
+	 
 class Solution {
   
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -26,7 +34,7 @@ class Solution {
         ArrayList<ListNode> cc = new ArrayList<ListNode>();
         int i=0;
         while(c1!=null&&c2!=null){
-            cc.add(addNodes(c1,c2));
+            cc.add(addNodes(c1,c2, null));
             if(c1==l1 && c2==l2){ch = cc;}
             c1 = c1.next; c2 = c2.next; cc = cc.next;
         }
