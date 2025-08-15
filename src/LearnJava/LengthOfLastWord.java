@@ -36,9 +36,6 @@ public class LengthOfLastWord {
     public static void main(String args[]){
         String str = "  fly me   to   the moon  ";
         String[] arr = str.trim().split("\\s+");
-        for (String s : arr) {
-            System.out.println(s + " length is: " + s.length());
-        }
         System.out.println(arr[arr.length-1].trim().length());
     }
     
