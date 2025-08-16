@@ -34,7 +34,7 @@ There will be at least one word in s.
 public class LengthOfLastWord {
 
     public static void main(String args[]){
-        String str = "  fly me   to   the moon  ";
+        String str = "  luffy is still joyboy  ";
         String[] arr = str.trim().split("\\s+");
         System.out.println(arr[arr.length-1].trim().length());
     }
