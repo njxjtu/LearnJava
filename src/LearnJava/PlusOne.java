@@ -15,6 +15,7 @@ public class PlusOne {
             
             num2 = num1 + 1;
 
+            System.out.println("num1: " + num1);
             System.out.println("num2: " + num2);
 
             int digits2Length = num2.toString().length();
