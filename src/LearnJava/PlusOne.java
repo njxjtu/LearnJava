@@ -29,17 +29,21 @@ public class PlusOne {
     public static void main(String args[]){
         int[] digits = {9,8,7,6,5,4,3,2,1,0};
         PlusOne p = new PlusOne();
-        int[] digits2 = p.plusOne(digits);
-        // Using Arrays.toString for a cleaner output
+        
+        // Print the input BEFORE calling the method
         System.out.println("Input: " + Arrays.toString(digits));
+        
+        int[] digits2 = p.plusOne(digits);
+        
+        // Now print the output
         System.out.println("Output: " + Arrays.toString(digits2)); // Expected: [9, 8, 7, 6, 5, 4, 3, 2, 1, 1]
 
         System.out.println("---");
 
         // Test case for [9, 9, 9]
         int[] digits3 = {9, 9, 9};
-        int[] digits4 = p.plusOne(digits3);
         System.out.println("Input: " + Arrays.toString(digits3));
+        int[] digits4 = p.plusOne(digits3);
         System.out.println("Output: " + Arrays.toString(digits4)); // Expected: [1, 0, 0, 0]
     }
 }
