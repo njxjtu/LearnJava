@@ -35,6 +35,52 @@ public class BigOConcept {
         return -1; // Target not found
     }
 
+        // Main sort method
+    public static void sort(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            return; // Already sorted or empty
+        }
+        int[] temp = new int[arr.length]; // Temporary array for merging
+        mergeSort(arr, temp, 0, arr.length - 1);
+    }
+
+    // Recursive merge sort method
+    private static void mergeSort(int[] arr, int[] temp, int left, int right) {
+        if (left < right) {
+            int mid = left + (right - left) / 2; // Calculate middle point
+            mergeSort(arr, temp, left, mid); // Sort first half
+            mergeSort(arr, temp, mid + 1, right); // Sort second half
+            merge(arr, temp, left, mid, right); // Merge the two halves
+        }
+    }
+
+        // Merge two sorted sub-arrays
+    private static void merge(int[] arr, int[] temp, int left, int mid, int right) {
+        // Copy elements to temporary array
+        for (int i = left; i <= right; i++) {
+            temp[i] = arr[i];
+        }
+
+        int i = left; // Pointer for the left sub-array
+        int j = mid + 1; // Pointer for the right sub-array
+        int k = left; // Pointer for the original array
+
+        // Merge back into the original array
+        while (i <= mid && j <= right) {
+            if (temp[i] <= temp[j]) {
+                arr[k++] = temp[i++];
+            } else {
+                arr[k++] = temp[j++];
+            }
+        }
+
+        // Copy remaining elements of left sub-array, if any
+        while (i <= mid) {
+            arr[k++] = temp[i++];
+        }
+
+        // Remaining elements of right sub-array are already in place (or handled by the above loop)
+    }
 
 
     public static void main(String args[]){
@@ -58,6 +104,25 @@ public class BigOConcept {
 
         System.out.println("Index of " + target1 + ": " + binarySearch(sortedArray, target1)); // Expected: 5
         System.out.println("Index of " + target2 + ": " + binarySearch(sortedArray, target2)); // Expected: -1
+
+        // O(nlogn) - Linearithmic Time - The running time is a combination of linear and logarithmic growth. 
+        //                                This is a very common and efficient complexity for sorting algorithms.
+        // Example: Merge Sort
+        int[] data = {12, 11, 13, 5, 6, 7};
+        System.out.println("Original array:");
+        for (int num : data) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        sort(data);
+
+        System.out.println("Sorted array:");
+        for (int num : data) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
     }
 
     
