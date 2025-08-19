@@ -82,6 +82,18 @@ public class BigOConcept {
         // Remaining elements of right sub-array are already in place (or handled by the above loop)
     }
 
+    public static int fibonacci(int n) {
+        if (n<=1) {
+            return 0;
+        }
+        else if (n == 2) {
+            return 1;
+        }
+        else {
+            return fibonacci(n-1) + fibonacci(n-2);
+        }
+    }
+
 
     public static void main(String args[]){
 
@@ -107,7 +119,7 @@ public class BigOConcept {
 
         // O(nlogn) - Linearithmic Time - The running time is a combination of linear and logarithmic growth. 
         //                                This is a very common and efficient complexity for sorting algorithms.
-        // Example: Merge Sort
+        // Example: Merge sort, quick sort
         int[] data = {12, 11, 13, 5, 6, 7};
         System.out.println("Original array:");
         for (int num : data) {
@@ -123,6 +135,19 @@ public class BigOConcept {
         }
         System.out.println();
 
+        // O(n^2) - Quadratic Time - The running time is proportional to the square of the input size. 
+        //                           If the input size doubles, the number of operations quadruples. 
+        //                           This is typically seen in nested loops.
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                // This nested loop runs n * n times.
+            }
+        }
+
+        // O(2^n) - Exponential Time - The running time doubles for every new element you add to the input. 
+        //     This is very slow and only practical for very small input sizes. Brute-force solutions to 
+        //problems like the Traveling Salesman Problem or a naive recursive algorithm for Fibonacci numbers.
+        System.out.println(fibonacci(5));
     }
 
     
