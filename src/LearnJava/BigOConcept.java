@@ -82,7 +82,7 @@ public class BigOConcept {
         // Remaining elements of right sub-array are already in place (or handled by the above loop)
     }
 
-    public static int fibonacci(int n) {
+    public static long fibonacci(long n) {
         if (n<=1) {
             return 0;
         }
@@ -147,7 +147,7 @@ public class BigOConcept {
         // O(2^n) - Exponential Time - The running time doubles for every new element you add to the input. 
         //     This is very slow and only practical for very small input sizes. Brute-force solutions to 
         //problems like the Traveling Salesman Problem or a naive recursive algorithm for Fibonacci numbers.
-        System.out.println(fibonacci(5));
+        System.out.println(fibonacci(48));
     }
 
     
