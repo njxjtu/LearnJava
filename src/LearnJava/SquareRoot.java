@@ -30,5 +30,10 @@ public class SquareRoot {
         }
         return (int) ans;
     }
+
+    public static void main(String[] args) {
+        SquareRoot sr = new SquareRoot();
+        System.out.println(sr.mySqrt(19));
+    }
     
 }
