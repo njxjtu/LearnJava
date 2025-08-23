@@ -33,20 +33,19 @@ public class SquareRoot {
 
     public int mySqrt2(int x) {
 
-        if (x < 0 ) throw new IllegalArgumentException("Input must be a non-negative integer.");
+        if (x < 0) {
+            throw new IllegalArgumentException("Input must be a non-negative integer.");
+        }
+        if (x < 2) {
+            return x;
+        }
 
-        else if (x == 0) return 0;
-        
-        else {
-            for (int i = 1; i<= x; i++) {
-                if ( i*i == x) return i;
-                else if ((i+1)*(i+1) == x) return i+1;
-                else if (i*i <= x && (i+1)*(i+1) >=x) {
-                    return i;
-                }
+        for (long i = 1; i <= x; i++) {
+            if (i * i > x) {
+                return (int) (i - 1);
             }
         }
-        return x;
+        return -1; // Should not be reached for non-negative x
     }
     public static void main(String[] args) {
         SquareRoot sr = new SquareRoot();
