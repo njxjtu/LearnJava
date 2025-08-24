@@ -1,4 +1,7 @@
 package LearnJava;
+
+import java.util.Arrays;
+
 /**
 Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
@@ -21,25 +24,43 @@ Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
  */ 
 public class MaximumSubarray {
 
-        public int maxSubArray(int[] nums) {
-            int sum = 0;
-            int larr = nums.length;
+    /**
+     * Finds the contiguous subarray with the largest sum using Kadane's Algorithm.
+     * The original implementation was O(n^3) and would be too slow for large inputs.
+     * It also had logical errors in how it calculated the sum.
+     * This version is O(n) and is the standard, efficient solution.
+     *
+     * @param nums The input array of integers.
+     * @return The sum of the largest subarray.
+     */
+    public int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0; // As per convention for an empty array.
+        }
 
-            if (larr == 0) {
-                return sum;
-            }
-            else if (larr == 1) {
-                return nums[0];
-            }
+        int maxSoFar = nums[0];
+        int maxEndingHere = nums[0];
 
+        for (int i = 1; i < nums.length; i++) {
+            // The maximum subarray ending at index i is either the number at i itself,
+            // or the number at i combined with the best subarray ending at i-1.
+            maxEndingHere = Math.max(nums[i], maxEndingHere + nums[i]);
 
-            for (int i=0; i<larr; i++) {
-                for (int j=i; j<larr; j++) {
-                    
-                }
-            }
-            return sum;
-        
+            // The overall maximum is the max of what we've seen so far
+            // and the best we can do ending at the current position.
+            maxSoFar = Math.max(maxSoFar, maxEndingHere);
+        }
+        return maxSoFar;
+    }
+
+    public static void main(String args[]){
+        MaximumSubarray ms = new MaximumSubarray();
+        int[] nums1 = {-2,1,-3,4,-1,2,1,-5,4};
+        System.out.println("Input: " + Arrays.toString(nums1) + " -> Max Sum: " + ms.maxSubArray(nums1));
+        int[] nums2 = {1};
+        System.out.println("Input: " + Arrays.toString(nums2) + " -> Max Sum: " + ms.maxSubArray(nums2));
+        int[] nums3 = {5,4,-1,7,8};
+        System.out.println("Input: " + Arrays.toString(nums3) + " -> Max Sum: " + ms.maxSubArray(nums3));
     }
     
 }
