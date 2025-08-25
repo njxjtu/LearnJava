@@ -1,6 +1,7 @@
 package LearnJava;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 /**
 Given an integer array nums, find the subarray with the largest sum, and return its sum.
@@ -53,14 +54,63 @@ public class MaximumSubarray {
         return maxSoFar;
     }
 
+    public int maxSubArray02(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            throw new InputMismatchException(); 
+        }
+
+        int l = nums.length;
+        int left = 0, right = 0;
+
+
+        if (l == 1) {
+            return nums[0];
+        }
+
+        int maxSoFar = nums[0], maxPre = nums[0];
+        
+        for (int i=1; i<l; i++) {
+            if (maxPre<0){
+                maxPre = nums[i];
+                if(maxPre > maxSoFar) {
+                    left = i;
+                    right = i;
+                    maxSoFar = maxPre;
+                }
+                else{
+                    continue;
+                }
+            }
+            else{
+                maxPre += nums[i];
+                if(maxPre > maxSoFar) {
+                    right = i;
+                    maxSoFar = maxPre;
+                }
+            }
+
+        }
+
+        return maxSoFar;
+    }
+
     public static void main(String args[]){
         MaximumSubarray ms = new MaximumSubarray();
         int[] nums1 = {-2,1,-3,4,-1,2,1,-5,4};
         System.out.println("Input: " + Arrays.toString(nums1) + " -> Max Sum: " + ms.maxSubArray(nums1));
+        System.out.println("Input: " + Arrays.toString(nums1) + " -> Max Sum02: " + ms.maxSubArray02(nums1));
         int[] nums2 = {1};
         System.out.println("Input: " + Arrays.toString(nums2) + " -> Max Sum: " + ms.maxSubArray(nums2));
+        System.out.println("Input: " + Arrays.toString(nums2) + " -> Max Sum02: " + ms.maxSubArray02(nums2));
         int[] nums3 = {5,4,-1,7,8};
         System.out.println("Input: " + Arrays.toString(nums3) + " -> Max Sum: " + ms.maxSubArray(nums3));
+        System.out.println("Input: " + Arrays.toString(nums3) + " -> Max Sum02: " + ms.maxSubArray02(nums3));
+        int[] nums4 = {-9,-7,105,234,-190,200};
+        System.out.println("Input: " + Arrays.toString(nums4) + " -> Max Sum: " + ms.maxSubArray(nums4));
+        System.out.println("Input: " + Arrays.toString(nums4) + " -> Max Sum02: " + ms.maxSubArray02(nums4));
+        int[] nums5 = {-9,0,4};
+        System.out.println("Input: " + Arrays.toString(nums5) + " -> Max Sum: " + ms.maxSubArray(nums5));
+        System.out.println("Input: " + Arrays.toString(nums5) + " -> Max Sum02: " + ms.maxSubArray02(nums5));
     }
     
 }
