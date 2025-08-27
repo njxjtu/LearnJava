@@ -2,6 +2,7 @@ package LearnJava;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
  * Given an m x n matrix, return all elements of the matrix in spiral order.
@@ -30,6 +31,10 @@ public class SpiralMatrix {
 
         public List<Integer> spiralOrder(int[][] matrix) {
 
+            if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+                return new ArrayList<Integer>();
+            };
+            
             List<Integer> result = new ArrayList<Integer>();
             int m=matrix.length;
             int n=matrix[0].length;
@@ -50,20 +55,21 @@ public class SpiralMatrix {
                 return result;
             }
 
-            for(int i=0; i<n; i++)
-            result.add(matrix[0][i]);
 
-            int[][] temp = new int[m-1][n];
-            for(int i=1; i<m; i++)
-            {
-                for(int j=0; j<n; j++)
-                temp[i-1][j]=matrix[i][j];
-            }
-            
-            result.addAll(spiralOrder(rotateMatrix(temp)));
 
             return result;
         
+    }
+
+    public static void main(String args[]) {
+        int[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};
+        SpiralMatrix sm = new SpiralMatrix();
+        List<Integer> result = sm.spiralOrder(matrix);
+
+        for (int i = 0; i < result.size(); i++) {
+            System.out.print(result.get(i) + " ");
+        }
+        System.out.println();
     }
     
 }
