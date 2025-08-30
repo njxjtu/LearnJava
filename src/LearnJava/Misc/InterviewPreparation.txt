@@ -1,0 +1,90 @@
+1. Core Java Fundamentals
+
+Even for experienced roles, interviewers will probe your understanding of the language's core principles. Don't skip these basics.
+
+Object-Oriented Programming (OOP): Be ready to explain the four pillars (Encapsulation, Inheritance, Polymorphism, Abstraction) with clear, real-world examples.
+Sample Question: "Can you explain the difference between an abstract class and an interface? When would you use one over the other?"
+     
+Java Keywords & Concepts:
+final (for variables, methods, and classes), finally, and finalize().
+static keyword: What does it mean for a method or variable?
+Access Modifiers: public, protected, private, and default.
+Collections Framework: This is a very common topic.
+Know the main interfaces: List, Set, Map.
+Understand the key implementations: ArrayList vs. LinkedList, HashSet vs. TreeSet, and especially HashMap (be prepared to explain how it works internally, e.g., hashing, collision handling).
+Sample Question: "When would you use an ArrayList versus a LinkedList? What are the performance trade-offs?"
+Concurrency:
+Understand the thread lifecycle.
+Explain what synchronized and volatile do.
+What is a deadlock and how can you prevent it?
+Familiarity with the java.util.concurrent package, especially ExecutorService.
+Java 8+ Features:
+Streams API: Be able to use map, filter, collect, etc.
+Lambda Expressions: How do they work? What is a functional interface?
+Optional: How does it help prevent NullPointerException?
+Sample Question: "Given a list of Employee objects, use the Streams API to find the average salary of all employees in the 'Engineering' department."
+2. Spring / Spring Boot & Web Services
+This is your core experience area, so expect deep-dive questions.
+
+Spring Core Concepts:
+Inversion of Control (IoC) / Dependency Injection (DI): Explain the concept and its benefits.
+Annotations: Be very familiar with @Component, @Service, @Repository, @Controller/@RestController, and especially @Autowired.
+Sample Question: "What is the difference between Component, Service, and Repository annotations in Spring?"
+Spring Boot:
+Auto-configuration: How does it work? How can you exclude a specific auto-configuration?
+Starters: What is the purpose of starters like spring-boot-starter-web?
+Configuration: How do you manage application properties (application.properties or application.yml)? What is the @Value annotation?
+RESTful APIs:
+What are the principles of REST? (Statelessness, Client-Server, etc.)
+Explain the common HTTP methods (GET, POST, PUT, DELETE, PATCH) and when to use them.
+What are HTTP status codes? (e.g., 200, 201, 400, 404, 500).
+Sample Question: "What is the difference between PUT and PATCH?"
+Microservices Concepts:
+What are the pros and cons of a microservices architecture compared to a monolith?
+How do microservices communicate? (e.g., REST APIs, Message Queues like RabbitMQ/Kafka).
+Concepts like Service Discovery (Eureka/Consul), API Gateway, and Circuit Breakers (Resilience4j/Hystrix).
+Sample Question: "How would you handle a situation where one microservice in a chain of calls is down?"
+3. PL/SQL and Database Concepts
+Your database skills are a significant asset. Be ready to demonstrate them.
+
+Advanced SQL:
+Joins: Be able to explain and write queries for INNER, LEFT/RIGHT, and FULL OUTER joins.
+Grouping and Aggregation: GROUP BY, HAVING, and aggregate functions (COUNT, SUM, AVG).
+Indexes: What are they? Why are they important for performance? What are the trade-offs?
+Sample Question: "Write a SQL query to find all employees who earn more than their managers."
+PL/SQL:
+Procedures vs. Functions: What's the difference?
+Packages: Why are they useful? (Encapsulation, performance, organization).
+Cursors: Explain implicit vs. explicit cursors and when to use them.
+Exception Handling: How do you handle errors within a PL/SQL block?
+Sample Question: "Describe a complex PL/SQL package you wrote. What problem did it solve?"
+Database Design:
+Normalization (at least up to 3NF).
+Primary Keys, Foreign Keys, and Constraints.
+4. Apereo CAS (Your Niche)
+This is a unique skill that can make you stand out. Frame it as a strength.
+
+Be prepared to explain what CAS is and its role in Single Sign-On (SSO).
+Talk about your experience supporting it. Did you customize it? Integrate it with new applications? Troubleshoot complex authentication flows?
+Sample Question: "Tell me about a challenging integration or support issue you faced with Apereo CAS and how you resolved it."
+5. System Design
+For an application developer, these questions test your ability to think about the big picture.
+
+You might be asked to design a high-level system like a URL shortener, a simple e-commerce site, or a Twitter-like feed.
+Focus on:
+Identifying the core components (web servers, application servers, databases, caches).
+Defining the API endpoints.
+Thinking about the data model (database schema).
+Discussing trade-offs (e.g., SQL vs. NoSQL, when to use a cache).
+Considering scalability and potential bottlenecks.
+6. Behavioral Questions
+These are just as important as technical questions. They want to know how you work. Use the STAR method (Situation, Task, Action, Result) to structure your answers.
+
+"Tell me about a time you had a disagreement with a team member. How did you resolve it?"
+"Describe the most challenging technical problem you've solved."
+"How do you stay up-to-date with new technologies?"
+"Walk me through a project you are particularly proud of from your resume."
+Final Tips for Preparation
+Know Your Resume: Be able to talk in-depth about every project and technology listed on your resume. This is the most common starting point for interviews.
+Practice Coding: Use platforms like LeetCode or HackerRank. Focus on easy and medium-level problems related to arrays, strings, hashmaps, and linked lists. The goal isn't just to get the right answer, but to communicate your thought process clearly.
+Prepare Questions for Them: Always have thoughtful questions ready to ask the interviewer about the team, the technology stack, the challenges they face, and the company culture. It shows you're engaged and genuinely interested.
