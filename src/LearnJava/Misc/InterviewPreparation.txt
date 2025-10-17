@@ -5,6 +5,62 @@ Even for experienced roles, interviewers will probe your understanding of the la
 Object-Oriented Programming (OOP): Be ready to explain the four pillars (Encapsulation, Inheritance, Polymorphism, Abstraction) with clear, real-world examples.
 Sample Question: "Can you explain the difference between an abstract class and an interface? When would you use one over the other?"
      
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which can contain data and code to manipulate that data. Its goal is to manage complexity and promote code reusability, structure, and efficiency.
+
+---
+
+## The Four Pillars of OOP with Real-World Examples
+
+The four core concepts, or "pillars," provide the structure for object-oriented design:
+
+### 1. Encapsulation 🛡️
+* **Definition:** The mechanism of **bundling data (attributes) and the methods (behaviors) that operate on that data** into a single unit (a class). It also involves **data hiding**, restricting direct access to an object's internal state.
+* **Real-World Example (A Car's Engine):** You interact with a car's engine using public controls like the accelerator and brake pedal. You are **encapsulated** from the hundreds of complex, internal components and processes. You can't directly manipulate the fuel injector; you must use the pedal, which ensures the process is controlled and safe.
+
+### 2. Abstraction 🌫️
+* **Definition:** The process of **showing only essential information** to the user while **hiding the complex, unnecessary details** of the implementation. It focuses on *what* an object does, not *how* it does it.
+* **Real-World Example (An ATM):** When you use an ATM, you select an option like "Withdraw Cash." You don't see the complex database queries, network communication, or vault mechanisms. The ATM **abstracts** away the complexity, presenting a simple, high-level interface.
+
+### 3. Inheritance 🧬
+* **Definition:** The mechanism by which one class (**subclass/child**) acquires the properties and behaviors (methods and fields) of another class (**superclass/parent**). It promotes **code reusability** and establishes an "is-a" relationship.
+* **Real-World Example (Biological Classification):** A `Dog` **is a** type of `Mammal`, and a `Mammal` **is an** `Animal`.
+    * The `Animal` class might have generic methods like `eat()` and `sleep()`.
+    * The `Mammal` class inherits these and adds its own, like `give_birth_live()`.
+    * The `Dog` class inherits all of the above, adding a specific method like `bark()`.
+
+### 4. Polymorphism 🎭
+* **Definition:** The ability of an object or method to take on **"many forms."** In OOP, this allows you to define a single interface for different data types. It is often achieved through method overriding (subclasses provide their own implementation of a parent's method) and method overloading (methods with the same name but different parameters).
+* **Real-World Example (The `draw` Command):** Imagine a graphics program with various shapes: `Circle`, `Square`, and `Triangle`. All these shapes have a `draw()` method, but their implementation is different.
+    * When the program calls `shape.draw()`, the **polymorphic** behavior determines the correct, specific code to execute at runtime (e.g., calling `Circle.draw()` draws a circle, and `Square.draw()` draws a square). The calling code doesn't need to know the specific shape type, only that it *can* be drawn.
+
+---
+
+## Abstract Class vs. Interface
+
+Both **abstract classes** and **interfaces** are tools used to achieve **Abstraction** and define a contract, but they serve different purposes in the overall design.
+
+| Feature | Abstract Class | Interface |
+| :--- | :--- | :--- |
+| **Concept** | Defines a **type/identity** (an "is-a" relationship). | Defines a **capability/contract** (a "can-do" relationship). |
+| **Implementation** | Can contain both **abstract methods** (no body) and **concrete methods** (with code/implementation). | Contains only method **signatures** (no implementation) historically; modern languages like Java/C# allow default methods. |
+| **Fields** | Can contain **instance variables** (state) and constructors. | Can only contain **constants** (`public static final`). Cannot have constructors. |
+| **Inheritance** | A class can only **extend one** abstract class (single inheritance). | A class can **implement multiple** interfaces (multiple inheritance of behavior). |
+
+### When to Use One Over the Other
+
+| Scenario | Use **Abstract Class** | Use **Interface** |
+| :--- | :--- | :--- |
+| **Shared Code** | When you have a group of closely related classes that **must share a common base implementation** and state (fields). | When you want to **define a contract** that unrelated classes must follow, but you don't need to share any implementation details. |
+| **"Is-A" Relationship** | When you want to model a clear, single inheritance hierarchy. (e.g., `Car` **is a** `Vehicle`). | When you need a class to exhibit multiple, different capabilities. (e.g., `Car` **can** be `Drivable`, `Lockable`, and `Paintable`). |
+| **Version Control** | Changing an abstract class (even adding a new method) can break all subclasses, as they might be forced to implement the new method. | Interfaces offer **greater flexibility** for adding new methods without breaking all implementors (due to **default methods** in modern languages). |
+
+For example, a `Vehicle` class would be a good **abstract class** because all vehicles share properties like having a `speed` and a common method like a generic `startEngine()`. However, `Swimmable` and `Flyable` would be **interfaces** because a `Duck` class (which also implements `Animal`) needs to be both `Swimmable` and `Flyable`, and a class can implement both interfaces.
+
+The video below discusses the core concepts of Object-Oriented Programming with a focus on real-world examples. [Object Oriented Programming concepts with real world example](https://www.youtube.com/watch?v=xTI8R0e7a8E) is relevant because it helps illustrate the four pillars with tangible analogies like a television.
+http://googleusercontent.com/youtube_content/0
+
+
+
 Java Keywords & Concepts:
 final (for variables, methods, and classes), finally, and finalize().
 static keyword: What does it mean for a method or variable?
