@@ -15,6 +15,9 @@ public class HomeProject {
 		expense2025.put("scienceAlliance0313", 150);
 		expense2025.put("dreamclassSummerCamp", 438);
 		expense2025.put("makersClub03", 210);
+		expense2025.put("woodcraft", 300);
+		expense2025.put("Microbit", 260);
+		expense2025.put("roller", 260);
 		
 		int sum = expense2025.values().stream()
                 .mapToInt(Integer::intValue)

@@ -1,0 +1,146 @@
+1. Core Java Fundamentals
+
+Even for experienced roles, interviewers will probe your understanding of the language's core principles. Don't skip these basics.
+
+Object-Oriented Programming (OOP): Be ready to explain the four pillars (Encapsulation, Inheritance, Polymorphism, Abstraction) with clear, real-world examples.
+Sample Question: "Can you explain the difference between an abstract class and an interface? When would you use one over the other?"
+     
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which can contain data and code to manipulate that data. Its goal is to manage complexity and promote code reusability, structure, and efficiency.
+
+---
+
+## The Four Pillars of OOP with Real-World Examples
+
+The four core concepts, or "pillars," provide the structure for object-oriented design:
+
+### 1. Encapsulation 🛡️
+* **Definition:** The mechanism of **bundling data (attributes) and the methods (behaviors) that operate on that data** into a single unit (a class). It also involves **data hiding**, restricting direct access to an object's internal state.
+* **Real-World Example (A Car's Engine):** You interact with a car's engine using public controls like the accelerator and brake pedal. You are **encapsulated** from the hundreds of complex, internal components and processes. You can't directly manipulate the fuel injector; you must use the pedal, which ensures the process is controlled and safe.
+
+### 2. Abstraction 🌫️
+* **Definition:** The process of **showing only essential information** to the user while **hiding the complex, unnecessary details** of the implementation. It focuses on *what* an object does, not *how* it does it.
+* **Real-World Example (An ATM):** When you use an ATM, you select an option like "Withdraw Cash." You don't see the complex database queries, network communication, or vault mechanisms. The ATM **abstracts** away the complexity, presenting a simple, high-level interface.
+
+### 3. Inheritance 🧬
+* **Definition:** The mechanism by which one class (**subclass/child**) acquires the properties and behaviors (methods and fields) of another class (**superclass/parent**). It promotes **code reusability** and establishes an "is-a" relationship.
+* **Real-World Example (Biological Classification):** A `Dog` **is a** type of `Mammal`, and a `Mammal` **is an** `Animal`.
+    * The `Animal` class might have generic methods like `eat()` and `sleep()`.
+    * The `Mammal` class inherits these and adds its own, like `give_birth_live()`.
+    * The `Dog` class inherits all of the above, adding a specific method like `bark()`.
+
+### 4. Polymorphism 🎭
+* **Definition:** The ability of an object or method to take on **"many forms."** In OOP, this allows you to define a single interface for different data types. It is often achieved through method overriding (subclasses provide their own implementation of a parent's method) and method overloading (methods with the same name but different parameters).
+* **Real-World Example (The `draw` Command):** Imagine a graphics program with various shapes: `Circle`, `Square`, and `Triangle`. All these shapes have a `draw()` method, but their implementation is different.
+    * When the program calls `shape.draw()`, the **polymorphic** behavior determines the correct, specific code to execute at runtime (e.g., calling `Circle.draw()` draws a circle, and `Square.draw()` draws a square). The calling code doesn't need to know the specific shape type, only that it *can* be drawn.
+
+---
+
+## Abstract Class vs. Interface
+
+Both **abstract classes** and **interfaces** are tools used to achieve **Abstraction** and define a contract, but they serve different purposes in the overall design.
+
+| Feature | Abstract Class | Interface |
+| :--- | :--- | :--- |
+| **Concept** | Defines a **type/identity** (an "is-a" relationship). | Defines a **capability/contract** (a "can-do" relationship). |
+| **Implementation** | Can contain both **abstract methods** (no body) and **concrete methods** (with code/implementation). | Contains only method **signatures** (no implementation) historically; modern languages like Java/C# allow default methods. |
+| **Fields** | Can contain **instance variables** (state) and constructors. | Can only contain **constants** (`public static final`). Cannot have constructors. |
+| **Inheritance** | A class can only **extend one** abstract class (single inheritance). | A class can **implement multiple** interfaces (multiple inheritance of behavior). |
+
+### When to Use One Over the Other
+
+| Scenario | Use **Abstract Class** | Use **Interface** |
+| :--- | :--- | :--- |
+| **Shared Code** | When you have a group of closely related classes that **must share a common base implementation** and state (fields). | When you want to **define a contract** that unrelated classes must follow, but you don't need to share any implementation details. |
+| **"Is-A" Relationship** | When you want to model a clear, single inheritance hierarchy. (e.g., `Car` **is a** `Vehicle`). | When you need a class to exhibit multiple, different capabilities. (e.g., `Car` **can** be `Drivable`, `Lockable`, and `Paintable`). |
+| **Version Control** | Changing an abstract class (even adding a new method) can break all subclasses, as they might be forced to implement the new method. | Interfaces offer **greater flexibility** for adding new methods without breaking all implementors (due to **default methods** in modern languages). |
+
+For example, a `Vehicle` class would be a good **abstract class** because all vehicles share properties like having a `speed` and a common method like a generic `startEngine()`. However, `Swimmable` and `Flyable` would be **interfaces** because a `Duck` class (which also implements `Animal`) needs to be both `Swimmable` and `Flyable`, and a class can implement both interfaces.
+
+The video below discusses the core concepts of Object-Oriented Programming with a focus on real-world examples. [Object Oriented Programming concepts with real world example](https://www.youtube.com/watch?v=xTI8R0e7a8E) is relevant because it helps illustrate the four pillars with tangible analogies like a television.
+http://googleusercontent.com/youtube_content/0
+
+
+
+Java Keywords & Concepts:
+final (for variables, methods, and classes), finally, and finalize().
+static keyword: What does it mean for a method or variable?
+Access Modifiers: public, protected, private, and default.
+Collections Framework: This is a very common topic.
+Know the main interfaces: List, Set, Map.
+Understand the key implementations: ArrayList vs. LinkedList, HashSet vs. TreeSet, and especially HashMap (be prepared to explain how it works internally, e.g., hashing, collision handling).
+Sample Question: "When would you use an ArrayList versus a LinkedList? What are the performance trade-offs?"
+Concurrency:
+Understand the thread lifecycle.
+Explain what synchronized and volatile do.
+What is a deadlock and how can you prevent it?
+Familiarity with the java.util.concurrent package, especially ExecutorService.
+Java 8+ Features:
+Streams API: Be able to use map, filter, collect, etc.
+Lambda Expressions: How do they work? What is a functional interface?
+Optional: How does it help prevent NullPointerException?
+Sample Question: "Given a list of Employee objects, use the Streams API to find the average salary of all employees in the 'Engineering' department."
+2. Spring / Spring Boot & Web Services
+This is your core experience area, so expect deep-dive questions.
+
+Spring Core Concepts:
+Inversion of Control (IoC) / Dependency Injection (DI): Explain the concept and its benefits.
+Annotations: Be very familiar with @Component, @Service, @Repository, @Controller/@RestController, and especially @Autowired.
+Sample Question: "What is the difference between Component, Service, and Repository annotations in Spring?"
+Spring Boot:
+Auto-configuration: How does it work? How can you exclude a specific auto-configuration?
+Starters: What is the purpose of starters like spring-boot-starter-web?
+Configuration: How do you manage application properties (application.properties or application.yml)? What is the @Value annotation?
+RESTful APIs:
+What are the principles of REST? (Statelessness, Client-Server, etc.)
+Explain the common HTTP methods (GET, POST, PUT, DELETE, PATCH) and when to use them.
+What are HTTP status codes? (e.g., 200, 201, 400, 404, 500).
+Sample Question: "What is the difference between PUT and PATCH?"
+Microservices Concepts:
+What are the pros and cons of a microservices architecture compared to a monolith?
+How do microservices communicate? (e.g., REST APIs, Message Queues like RabbitMQ/Kafka).
+Concepts like Service Discovery (Eureka/Consul), API Gateway, and Circuit Breakers (Resilience4j/Hystrix).
+Sample Question: "How would you handle a situation where one microservice in a chain of calls is down?"
+3. PL/SQL and Database Concepts
+Your database skills are a significant asset. Be ready to demonstrate them.
+
+Advanced SQL:
+Joins: Be able to explain and write queries for INNER, LEFT/RIGHT, and FULL OUTER joins.
+Grouping and Aggregation: GROUP BY, HAVING, and aggregate functions (COUNT, SUM, AVG).
+Indexes: What are they? Why are they important for performance? What are the trade-offs?
+Sample Question: "Write a SQL query to find all employees who earn more than their managers."
+PL/SQL:
+Procedures vs. Functions: What's the difference?
+Packages: Why are they useful? (Encapsulation, performance, organization).
+Cursors: Explain implicit vs. explicit cursors and when to use them.
+Exception Handling: How do you handle errors within a PL/SQL block?
+Sample Question: "Describe a complex PL/SQL package you wrote. What problem did it solve?"
+Database Design:
+Normalization (at least up to 3NF).
+Primary Keys, Foreign Keys, and Constraints.
+4. Apereo CAS (Your Niche)
+This is a unique skill that can make you stand out. Frame it as a strength.
+
+Be prepared to explain what CAS is and its role in Single Sign-On (SSO).
+Talk about your experience supporting it. Did you customize it? Integrate it with new applications? Troubleshoot complex authentication flows?
+Sample Question: "Tell me about a challenging integration or support issue you faced with Apereo CAS and how you resolved it."
+5. System Design
+For an application developer, these questions test your ability to think about the big picture.
+
+You might be asked to design a high-level system like a URL shortener, a simple e-commerce site, or a Twitter-like feed.
+Focus on:
+Identifying the core components (web servers, application servers, databases, caches).
+Defining the API endpoints.
+Thinking about the data model (database schema).
+Discussing trade-offs (e.g., SQL vs. NoSQL, when to use a cache).
+Considering scalability and potential bottlenecks.
+6. Behavioral Questions
+These are just as important as technical questions. They want to know how you work. Use the STAR method (Situation, Task, Action, Result) to structure your answers.
+
+"Tell me about a time you had a disagreement with a team member. How did you resolve it?"
+"Describe the most challenging technical problem you've solved."
+"How do you stay up-to-date with new technologies?"
+"Walk me through a project you are particularly proud of from your resume."
+Final Tips for Preparation
+Know Your Resume: Be able to talk in-depth about every project and technology listed on your resume. This is the most common starting point for interviews.
+Practice Coding: Use platforms like LeetCode or HackerRank. Focus on easy and medium-level problems related to arrays, strings, hashmaps, and linked lists. The goal isn't just to get the right answer, but to communicate your thought process clearly.
+Prepare Questions for Them: Always have thoughtful questions ready to ask the interviewer about the team, the technology stack, the challenges they face, and the company culture. It shows you're engaged and genuinely interested.
