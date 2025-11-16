@@ -3,7 +3,7 @@ package LearnJava;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LamdaExpression {
+public class LamdaExpression2 {
 	
 	public static void main (String args[]) {
 		Set<String> strSet = new HashSet<String>();
