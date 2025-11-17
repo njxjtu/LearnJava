@@ -36,9 +36,22 @@ public class ReverseInteger {
        return (x>=0)? r:-r;
    }
    
+   public int reverse3(int x) {
+	   int result = 0;
+	   String temp = ((Integer)x).toString();
+	   char[] tempChar = temp.toCharArray();
+	   StringBuffer sb = new StringBuffer();
+	   for(int i=temp.length()-1; i>=0; i--) {
+		   sb.append(tempChar[i]);
+	   }
+	   result = (int) Integer.parseInt(sb.toString());
+	   return result;
+   }
+   
    public static void main(String[] args){
 	   ReverseInteger obj = new ReverseInteger();
-	   System.out.println(obj.reverse(1534236469));
+	   
+	   System.out.println(obj.reverse3(15300));
 	   //System.out.println(obj.reverse2(1534236469));
    }
 }
