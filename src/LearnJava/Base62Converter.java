@@ -56,4 +56,21 @@ public class Base62Converter {
         
         return number;
     }
+    
+    public static void main(String[] args) {
+        long decimalNumber = 123456789L;
+        
+        // Encode (Convert to base 62)
+        String base62Result = Base62Converter.encode(decimalNumber);
+        // Result: "K9Gl"
+        
+        System.out.println("Decimal: " + decimalNumber);
+        System.out.println("Base 62: " + base62Result);
+
+        // Decode (Convert back to base 10)
+        long decodedNumber = Base62Converter.decode(base62Result);
+        // Result: 123456789
+        
+        System.out.println("Decoded: " + decodedNumber);
+    }
 }
